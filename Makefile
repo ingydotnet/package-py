@@ -28,24 +28,61 @@
 #
 ###
 
-PACKAGE_BASE = $(MAKEFILE_LIST:%/Makefile=%)
+.PHONY: \
+    default \
+    help \
+    setup \
+    package-info \
+    build \
+    test \
+    devtest \
+    install \
+    register \
+    sdist \
+    clean \
+    upload \
+    run \
 
-.PHONY: setup default build test devtest install register sdist clean upload run
+# This variable is hardcoded into the Makefile by initial setup.
+# If you move package-py, you need to change this.
+PACKAGE_BASE = $(MAKEFILE_LIST:%/Makefile=%)
+# TODO - Add a test to ensure PACKAGE_BASE is valid.
+
+PYTHON = python
+
+SETUP_TARGETS1 = Makefile package
+SETUP_TARGETS2 = setup.py
+SETUP_TARGETS = $(SETUP_TARGETS1) $(SETUP_TARGETS2)
 
 ALL_TESTS = $(shell echo tests/*.py)
 ALL_DEV_TESTS = $(shell echo dev-tests/*.py)
-PYTHON = python
-SETUP_TARGETS = Makefile setup.py package
 
-default: help
+default:
+	@echo "This is the Python package package package Makefile."
+	@echo
+	@echo "Run 'make help' for more information."
 
 help::
-	@cat $(PACKAGE_BASE)/MakeHelp.rst
+	@cat $(PACKAGE_BASE)/HelpMake.txt
 
-setup:: $(SETUP_TARGETS)
+package-info::
+	$(PYTHON) $(PACKAGE_BASE)/bin/make_package_info.py
 
-$(SETUP_TARGETS)::
+# This rule is disabled after initial setup.
+setup: $(SETUP_TARGETS) _fixup _next
+
+_fixup::
+	$(PYTHON) $(PACKAGE_BASE)/bin/fix_makefile.py "$(PACKAGE_BASE)"
+
+_next::
+	@cat $(PACKAGE_BASE)/NextSteps.txt
+
+
+$(SETUP_TARGETS1)::
 	cp -fr $(PACKAGE_BASE)/$@ ./
+
+$(SETUP_TARGETS2)::
+	cp -fr ./bin/$@ ./
 
 build test devtest install register sdist clean::
 	$(PYTHON) setup.py $@
@@ -62,3 +99,7 @@ $(ALL_TESTS) $(ALL_DEV_TESTS): run
 clean::
 	find . -name '*.pyc' | xargs rm
 	rm -fr build dist MANIFEST *.egg-info
+
+# TODO:
+# - Add a 'MANIFEST.in' target
+# - Make sure that 'package' is in MANIFEST.in

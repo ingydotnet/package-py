@@ -2,7 +2,8 @@
 package package package
 """
 
-import os, sys
+import os, sys, glob
+from distutils.core import Command
 
 __version__ = '0.0.1'
 
@@ -20,12 +21,42 @@ except ImportError, err:
         die(ENOSETUP)
 
 def setup():
-    if not sys.path.exists('package/info.py'):
-        generate_package_info()
-
     try:
         import package.info
     except ImportError, err:
         die(ENOINFO)
 
-    real_setup(**get_setup_info())
+    args = package.info.get()
+    args['cmdclass'] = {
+        'test': Test,
+        'devtest': DevTest,
+    }
+
+    real_setup(**args)
+
+class Test(Command):
+    user_options = []
+    test_dir = 'tests'
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        build_cmd = self.get_finalized_command('build')
+        build_cmd.run()
+        sys.path.insert(0, build_cmd.build_lib)
+        sys.path.insert(0, self.test_dir)
+        def exit(code):
+            pass
+        sys.exit = exit
+
+        for test in glob.glob(self.test_dir + '/*.py'):
+            name = test[test.index('/') + 1: test.rindex('.')]
+            module = __import__(name)
+            module.cdent.test.main(module=module, argv=[''])
+
+class DevTest(Test):
+    test_dir = 'dev-tests'

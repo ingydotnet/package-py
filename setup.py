@@ -6,7 +6,7 @@ import sys
 import codecs
 import glob
 
-from distutils.core import Command
+from distutils.core import setup, Command
 
 try:
     from setuptools import setup
@@ -24,8 +24,8 @@ import package
 
 if __name__ == '__main__':
     packages = []
-    for t in os.walk('package'):
-        packages.append(t[0].replace('/', '.'))
+#     for t in os.walk('package'):
+#         packages.append(t[0].replace('/', '.'))
 
     setup(
         name='package',

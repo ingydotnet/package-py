@@ -53,6 +53,7 @@ PYTHON = python
 PACKAGE_FILES = \
 	package/__init__.py \
 	package/errors.py \
+	package/unittest.py \
 
 SETUP_TARGETS = \
 	Makefile \

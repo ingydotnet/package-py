@@ -81,8 +81,8 @@ To use this Python package packaging technique, follow these simple steps:
    ``package/`` subdirectory in your project directory.
 
 5) Edit ``package/info.yaml`` (for information specific to your project)
-and ``~/.package-py/config.yaml`` (for information applicable to all
-your Python projects) with all the information about your package.
+   and ``~/.package-py/config.yaml`` (for information applicable to all
+   your Python projects) with all the information about your package.
 
 6) ``make help``
 

@@ -1,0 +1,6 @@
+- Add a Makefile test to ensure PACKAGE_BASE is valid.
+- Protect against running 'make upgrade' in this repo.
+- Assert the ./package does not exist on 'make setup'
+- Add a 'MANIFEST.in' target
+- Make sure that 'package' is in MANIFEST.in
+- Backup setup.py on 'make setup'

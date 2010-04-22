@@ -1,3 +1,6 @@
+- version: 0.0.3
+  date:    Thu Apr 22 08:17:31 PDT 2010
+  changes: Fix some bugs.
 - version: 0.0.2
   date:    Thu Apr 22 05:11:16 PDT 2010
   changes: First release.

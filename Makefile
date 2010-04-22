@@ -47,7 +47,6 @@
 # This variable is hardcoded into the Makefile by initial setup.
 # If you move package-py, you need to change this.
 PACKAGE_BASE = $(MAKEFILE_LIST:%/Makefile=%)
-# TODO - Add a test to ensure PACKAGE_BASE is valid.
 
 PYTHON = python
 
@@ -97,7 +96,7 @@ _fixup::
 _next::
 	@cat $(PACKAGE_BASE)/NextSteps.txt
 
-Makefile $(PACKAGE_FILES)::
+Makefile $(PACKAGE_FILES) package/info.yaml::
 	cp $(PACKAGE_BASE)/$@ $@
 
 setup.py::
@@ -110,6 +109,8 @@ package::
 #-----------------------------------------------------------------------------#
 # setup.py targets
 #-----------------------------------------------------------------------------#
+register:: package-info
+
 build test devtest install register sdist clean::
 	$(PYTHON) setup.py $@
 
@@ -125,7 +126,3 @@ $(ALL_TESTS) $(ALL_DEV_TESTS): run
 clean::
 	find . -name '*.pyc' | xargs rm
 	rm -fr build dist MANIFEST *.egg-info
-
-# TODO:
-# - Add a 'MANIFEST.in' target
-# - Make sure that 'package' is in MANIFEST.in

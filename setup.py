@@ -3,8 +3,6 @@
 
 import os
 import sys
-import codecs
-import glob
 
 from distutils.core import setup, Command
 
@@ -23,23 +21,12 @@ import package
 
 
 if __name__ == '__main__':
-    packages = []
-#     for t in os.walk('package'):
-#         packages.append(t[0].replace('/', '.'))
-
     setup(
         name='package',
         version=package.__version__,
 
         description='package is a package to package your package',
-        long_description = codecs.open(
-            os.path.join(
-                os.path.dirname(__file__),
-                'README.rst'
-            ),
-            'r',
-            'utf-8'
-        ).read(),
+        long_description = open('README.rst', 'r').read(),
 
         # See: http://pypi.python.org/pypi?:action=list_classifiers
         classifiers = [
@@ -58,7 +45,7 @@ if __name__ == '__main__':
         license='Simplified BSD License',
         url='http://www.pypi.org/pypi/package/',
 
-        packages=packages,
+        packages=[],
 
         install_requires = [
             'setuptools',

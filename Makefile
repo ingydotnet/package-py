@@ -1,4 +1,4 @@
-###
+#-----------------------------------------------------------------------------#
 #
 # Greetings!
 #
@@ -26,7 +26,7 @@
 #
 # Cheers!
 #
-###
+#-----------------------------------------------------------------------------#
 
 .PHONY: \
     default \
@@ -42,6 +42,7 @@
     clean \
     upload \
     run \
+ 
 
 # This variable is hardcoded into the Makefile by initial setup.
 # If you move package-py, you need to change this.
@@ -50,13 +51,27 @@ PACKAGE_BASE = $(MAKEFILE_LIST:%/Makefile=%)
 
 PYTHON = python
 
-SETUP_TARGETS1 = Makefile package
-SETUP_TARGETS2 = setup.py
-SETUP_TARGETS = $(SETUP_TARGETS1) $(SETUP_TARGETS2)
+PACKAGE_FILES = \
+	package/__init__.py \
+	package/errors.py \
+
+SETUP_TARGETS = \
+	Makefile \
+	setup.py \
+	$(PACKAGE_FILES) \
+	package/info.yaml \
+
+UPGRADE_TARGETS = \
+	Makefile \
+	setup.py \
+	$(PACKAGE_FILES) \
 
 ALL_TESTS = $(shell echo tests/*.py)
 ALL_DEV_TESTS = $(shell echo dev-tests/*.py)
 
+#-----------------------------------------------------------------------------#
+# package-py targets
+#-----------------------------------------------------------------------------#
 default:
 	@echo "This is the Python package package package Makefile."
 	@echo
@@ -69,7 +84,12 @@ package-info::
 	$(PYTHON) $(PACKAGE_BASE)/bin/make_package_info.py
 
 # This rule is disabled after initial setup.
-setup: $(SETUP_TARGETS) _fixup _next
+setup: package $(SETUP_TARGETS) _fixup _next
+
+unsetup:
+	rm -f $(UPGRADE_TARGETS)
+
+upgrade: unsetup $(UPGRADE_TARGETS) _fixup package-info
 
 _fixup::
 	$(PYTHON) $(PACKAGE_BASE)/bin/fix_makefile.py "$(PACKAGE_BASE)"
@@ -77,13 +97,19 @@ _fixup::
 _next::
 	@cat $(PACKAGE_BASE)/NextSteps.txt
 
+Makefile $(PACKAGE_FILES)::
+	cp $(PACKAGE_BASE)/$@ $@
 
-$(SETUP_TARGETS1)::
-	cp -fr $(PACKAGE_BASE)/$@ ./
+setup.py::
+	cp $(PACKAGE_BASE)/bin/$@ $@
 
-$(SETUP_TARGETS2)::
-	cp -fr ./bin/$@ ./
+package::
+	mkdir $@
 
+
+#-----------------------------------------------------------------------------#
+# setup.py targets
+#-----------------------------------------------------------------------------#
 build test devtest install register sdist clean::
 	$(PYTHON) setup.py $@
 

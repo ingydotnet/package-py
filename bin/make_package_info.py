@@ -24,7 +24,7 @@ def check_config(config):
     if config.get('long_description_from'):
         file = config['long_description_from']
         del config['long_description_from']
-        config['description'] = open(file, 'r').read()
+        config['long_description'] = open(file, 'r').read()
     if config.get('packages_from'):
         dirs = config['packages_from']
         del config['packages_from']

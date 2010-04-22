@@ -2,4 +2,7 @@ include README.rst
 include CHANGES.yaml
 include LICENSE
 include Makefile
-include HelpMake.rst
+include HelpMake.txt
+include NextSteps.txt
+include package/*
+include bin/*

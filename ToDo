@@ -1,7 +1,3 @@
 - Add a Makefile test to ensure PACKAGE_BASE is valid.
-- Assert the ./package does not exist on 'make setup'
-- Add a 'MANIFEST.in' target
-- Make sure that 'package' is in MANIFEST.in
-- Backup setup.py on 'make setup'
-- Install a sample README.rst on startup
+- Error if setup.py exists on setup
 - Copy README.rst to README on 'make sdist'

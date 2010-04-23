@@ -1,3 +1,6 @@
+- version: 0.0.5
+  date:    Thu Apr 22 23:00:10 PDT 2010
+  changes: Add boilerplate setup files
 - version: 0.0.4
   date:    Thu Apr 22 09:27:21 PDT 2010
   changes: Test runner had a reference to cdent.

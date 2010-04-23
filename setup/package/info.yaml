@@ -32,11 +32,14 @@ long_description:
 ## The url of a website for your Python Package
 url:
 
+## A list of all the modules to distribute
+# py_modules: []
+
 ## A list of all the module package directories to distribute
 packages: []
 
 ## A lists of the top level direcories to descend to determine packages.
-# packages_from
+# packages_from:
 
 ## A list of script files to install
 scripts: []
@@ -48,11 +51,10 @@ install_requires: []
 # These are general settings and are best put in $HOME/.package-py/info.yaml
 #----------------------------------------------------------------------------#
 ## Your personal name
-# author: Ingy dot Net
+# author: Your Name
  
 ## Your contact email address
-# author_email: ingy@ingy.net
+# author_email: you@example.com
 
 ## The license type for your Python Packages
 # license: Simplified BSD License
-

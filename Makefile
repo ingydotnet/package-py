@@ -15,11 +15,11 @@
 # If you are the module author, you can run `make help` to see all the
 # commands that are available to you.
 #
-# This Makefile currently assumes that if you are the package author, that you
-# are on some kind of Unix based system (or else you are kinda nuts, and
+# This Makefile currently assumes that, if you are the package author, that
+# you are on some kind of Unix based system (or else you are kinda nuts, and
 # probably shouldn't be using this thing in the first place! :)
 #
-# For more information on the package package package package, visit the
+# For more information on the Python package package package, visit the
 # Python Package Index here:
 #
 #     http://pypi.python.org/pypi/package/
@@ -35,6 +35,7 @@
     package-info \
     build \
     test \
+    tests \
     devtest \
     install \
     register \
@@ -55,11 +56,21 @@ PACKAGE_FILES = \
 	package/errors.py \
 	package/unittest.py \
 
+SETUP_FILES = \
+	setup.py \
+	package/info.yaml \
+	README.rst \
+	LICENSE \
+	CHANGES.yaml \
+
+TESTS_FILES: \
+	tests/test_import.py \
+
 SETUP_TARGETS = \
 	Makefile \
-	setup.py \
 	$(PACKAGE_FILES) \
-	package/info.yaml \
+	$(SETUP_FILES) \
+	$(TESTS_FILES) \
 
 UPGRADE_TARGETS = \
 	Makefile \
@@ -78,33 +89,37 @@ default:
 	@echo "Run 'make help' for more information."
 
 help::
-	@cat $(PACKAGE_BASE)/HelpMake.txt
+	@cat $(PACKAGE_BASE)/help/make.txt
+
+# This rule is disabled after initial setup.
+setup: _setup $(SETUP_TARGETS) _fixup _next
+
+_setup::
+	@if [ -e "package" ]; then echo "Can't setup if 'package' directory exists."; else mkdir package; fi
+	@if [ ! -e "tests" ]; then mkdir tests; fi
 
 package-info::
 	$(PYTHON) $(PACKAGE_BASE)/bin/make_package_info.py
 
-# This rule is disabled after initial setup.
-setup: package $(SETUP_TARGETS) _fixup _next
+upgrade: _not_for_me $(UPGRADE_TARGETS) _fixup package-info
 
-unsetup:
-	rm -f $(UPGRADE_TARGETS)
-
-upgrade: unsetup $(UPGRADE_TARGETS) _fixup package-info
+_not_for_me::
+	@if [ -e "help" ]; then echo "Don't do that here!!!"; exit 1; fi
 
 _fixup::
 	$(PYTHON) $(PACKAGE_BASE)/bin/fix_makefile.py "$(PACKAGE_BASE)"
 
 _next::
-	@cat $(PACKAGE_BASE)/NextSteps.txt
+	@cat $(PACKAGE_BASE)/help/next.txt
 
-Makefile $(PACKAGE_FILES) package/info.yaml::
+$(PACKAGE_FILES) Makefile::
 	cp $(PACKAGE_BASE)/$@ $@
 
-setup.py::
-	cp $(PACKAGE_BASE)/bin/$@ $@
+$(SETUP_FILES)::
+	-cp -n $(PACKAGE_BASE)/setup/$@ $@
 
-package::
-	mkdir $@
+$(TESTS_FILES)::
+	-cp -n $(PACKAGE_BASE)/setup/tests/$@ tests/$@
 
 
 #-----------------------------------------------------------------------------#

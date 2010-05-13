@@ -15,16 +15,44 @@ except ImportError, err:
     die(ENOYAML)
 
 def check_config(config):
-    if config.get('version_from_module'):
+    # require 'name'
+    if 'name' not in config:
+        die(ENONAME)
+
+    # set default for version
+    if not ('version' in config or
+            'version_from_module' in config):
+        config['version_from_module'] = config['name']
+
+    # set default for long_description
+    if not ('long_description' in config or
+            'long_description_from' in config):
+        import glob
+        readme = glob.glob('README*')
+        if readme:
+            config['long_description_from'] = readme[0]
+
+    # set default for packages
+    if not ('py_modules' in config or
+            'packages' in config or
+            'packages_from' in config):
+        config['packages_from'] = config['name']
+
+    # get version from module
+    if 'version_from_module' in config:
         module = config['version_from_module']
         del config['version_from_module']
         ns = {}
         exec('import ' + module) in ns
         config['version'] = ns[module].__version__
-    if config.get('long_description_from'):
+
+    # read long description
+    if 'long_description_from' in config:
         file = config['long_description_from']
         del config['long_description_from']
         config['long_description'] = open(file, 'r').read()
+
+    # find module packages
     if config.get('packages_from'):
         dirs = config['packages_from']
         del config['packages_from']

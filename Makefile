@@ -63,8 +63,8 @@ SETUP_FILES = \
 	LICENSE \
 	CHANGES.yaml \
 
-TESTS_FILES: \
-	tests/test_import.py \
+TESTS_FILES = \
+	test_import.py \
 
 SETUP_TARGETS = \
 	Makefile \
@@ -119,7 +119,7 @@ $(SETUP_FILES)::
 	-cp -n $(PACKAGE_BASE)/setup/$@ $@
 
 $(TESTS_FILES)::
-	-cp -n $(PACKAGE_BASE)/setup/tests/$@ tests/$@
+	cp -n $(PACKAGE_BASE)/setup/tests/$@ tests/$@
 
 
 #-----------------------------------------------------------------------------#

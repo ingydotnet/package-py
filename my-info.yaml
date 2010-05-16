@@ -1,0 +1,17 @@
+#----------------------------------------------------------------------------#
+# You might want to keep info that is common to all your packages in here.
+# If so, be sure to use the 'include' directive in your info.yaml files.
+#----------------------------------------------------------------------------#
+## Your personal name. Required.
+author: Jane Q Public
+ 
+## Your contact email address. Required.
+author_email: you@example.com
+
+## Required. See: http://pypi.python.org/pypi?:action=list_classifiers
+classifiers:
+- 'Development Status :: 2 - Pre-Alpha'
+- 'License :: OSI Approved :: BSD License'
+- 'Programming Language :: Python'
+- 'Intended Audience :: Developers'
+

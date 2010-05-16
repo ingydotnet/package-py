@@ -3,7 +3,7 @@ This script generates a Python module called 'package.info' based on settings
 in configuration files.
 """
 
-import os, sys, pprint
+import os, sys, pprint, glob
 
 sys.path.insert(0, '')
 
@@ -16,8 +16,9 @@ except ImportError, err:
 
 def check_config(config):
     # require 'name'
-    if 'name' not in config:
-        die(ENONAME)
+    if ('name' not in config or
+            config['name'] == 'your-package'):
+        die(ELOCALINFONOTSET)
 
     # set default for version
     if not ('version' in config or
@@ -27,7 +28,6 @@ def check_config(config):
     # set default for long_description
     if not ('long_description' in config or
             'long_description_from' in config):
-        import glob
         readme = glob.glob('README*')
         if readme:
             config['long_description_from'] = readme[0]
@@ -46,6 +46,12 @@ def check_config(config):
         exec('import ' + module) in ns
         config['version'] = ns[module].__version__
 
+    if 'description' not in config:
+        module = config['name']
+        ns = {}
+        exec('import ' + module) in ns
+        config['description'] = ns[module].__doc__
+
     # read long description
     if 'long_description_from' in config:
         file = config['long_description_from']
@@ -53,13 +59,16 @@ def check_config(config):
         config['long_description'] = open(file, 'r').read()
 
     # find module packages
-    if config.get('packages_from'):
+    if 'packages_from' in config:
         dirs = config['packages_from']
         del config['packages_from']
         config['packages'] = []
         for dir in dirs:
             for t in os.walk(dir):
                 config['packages'].append(t[0].replace('/', '.'))
+
+    if 'scripts' not in config:
+        config['scripts'] = glob.glob('bin/*')
 
 if __name__ == '__main__':
     home = os.environ.get('HOME')
@@ -68,31 +77,33 @@ if __name__ == '__main__':
 
     config = {}
 
-    f = home + '/.package-py/info.yaml'
-    if not os.path.exists(f):
-        die(ENOHOMEINFO)
-    d = yaml.load(open(f, 'r'))
-    config.update(d)
-
     f = './package/info.yaml'
     if not os.path.exists(f):
         die(ENOLOCALINFO)
     d = yaml.load(open(f, 'r'))
-    if not d.get('name'):
-        die(ELOCALINFONOTSET)
+
+    if 'include' in d:
+        config.update(yaml.load(open(d['include'], 'r')))
+        del d['include']
+
     config.update(d)
+
+    if (os.path.exists('your-package') and
+            'name' in config and
+            config['name'] != 'your-package'):
+        os.rename('your-package', config['name'])
 
     check_config(config)
 
-    dict = pprint.pformat(config, indent=2)
+    info = pprint.pformat(config, indent=2)
 
     module = """\
 def get():
-    dict = {}
-    dict.update(
-%(dict)s
+    info = {}
+    info.update(
+%(info)s
 )
-    return dict
+    return info
 """ % locals()
     
     f = open('package/info.py', 'w')

@@ -1,3 +1,15 @@
+- version: 0.0.7
+  date:    Sat May 15 20:11:31 PDT 2010
+  changes:
+  - Stop using 'cp -n' in Makefile. Not portable.
+  - Make the info.yaml file clearer and simpler.
+  - Stop supporting ~/.package-py/info.yaml
+  - Support the 'include' directive.
+  - Include '' in the setup.py path.
+  - Don't let setup.py install the package package.
+- version: 0.0.6
+  date:    Sat May 15 20:11:12 PDT 2010
+  changes: Seapig changes.
 - version: 0.0.5
   date:    Thu Apr 22 23:00:10 PDT 2010
   changes: Add boilerplate setup files

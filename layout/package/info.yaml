@@ -1,0 +1,58 @@
+#----------------------------------------------------------------------------#
+# This is the config file for your (you, the package author) package. It
+# supplies all the info that eventually gets used by `setup.py`. 
+#----------------------------------------------------------------------------#
+
+## You can include a file of common settings.
+# include: ../package-py/my-info.yaml
+
+## Name of your package. Required. Many other settings key on this value.
+name: your-package
+
+## Your personal name. Required.
+# author: Jane Q Public
+ 
+## Your contact email address. Required.
+# author_email: you@example.com
+
+## Required. See: http://pypi.python.org/pypi?:action=list_classifiers
+# classifiers:
+# - 'Development Status :: 2 - Pre-Alpha'
+# - 'License :: OSI Approved :: BSD License'
+# - 'Programming Language :: Python'
+# - 'Intended Audience :: Developers'
+
+#----------------------------------------------------------------------------#
+# The remaining values can usually be pulled from your layout.
+#----------------------------------------------------------------------------#
+
+## Short package description. Default is first doc line of main module.
+# description: ???
+
+## The current version number of this Python Package...
+# version: ???
+# version_from_module: ???          # Defaults to 'name'
+
+## Long package description. You probably want to use 'long_description_from'
+long_description:
+
+## The file containing the long description. Default is README*.
+# long_description_from: README
+
+## The url of a website for your Python Package
+# url: http://yourpackage.example.com
+
+## A list of directories to descend to determine packages. Default is 'name'.
+# packages_from:
+
+## A list of all the modules to distribute.
+# py_modules: []
+
+## A list of all the module package directories to distribute.
+# packages: []
+
+## A list of script files to install. Default is bin/*
+# scripts: []
+
+## A list of dependency packages (from PyPi)
+# install_requires: []

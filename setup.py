@@ -1,54 +1,32 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-import os
-import sys
+print """
+Greetings!
 
-from distutils.core import setup, Command
+It looks like you are trying to install this package (called `package`). STOP!
 
-try:
-    from setuptools import setup
-except ImportError, err:
-    sys.stderr.write("""
-You need to install the 'setuptools' Python package first.
+`package` is a set of tools to make Python packages easier to write and
+maintain, and to make the resulting packages easier for their users to
+install.
 
-You can get it from here: http://pypi.python.org/pypi/setuptools/
+If you are not a (possibly aspiring) Python package author, you can stop
+reading right now.
 
-""")
-    sys.exit(1)
+...
 
-import package
+I'm glad you are still reading. You must be a (possibly aspiring) Python
+package author. Good on you!
 
+To use this stuff either untar package-#.#.#.tar.gz (get it from
+http://pypi.python.org/pypi/package/) or get/git the development sources
+directly from http://github.com/ingydotnet/package-py. Put the `package`
+directory under your src directory, next to the Python packages you are
+authoring, and call it `package-py/`.
 
-if __name__ == '__main__':
-    setup(
-        name='package',
-        version=package.__version__,
+Further instructions can be found at http://pypi.python.org/pypi/package/
 
-        description='package is a package to package your package',
-        long_description = open('README.rst', 'r').read(),
+Enjoy!
 
-        # See: http://pypi.python.org/pypi?:action=list_classifiers
-        classifiers = [
-            'Development Status :: 2 - Pre-Alpha',
-            'Environment :: Console',
-            'Intended Audience :: Developers',
-            'License :: OSI Approved :: BSD License',
-            'Programming Language :: Python',
-            'Topic :: Software Development',
-            'Topic :: System :: Software Distribution',
-            'Topic :: Utilities',
-        ],
+"""
 
-        author='Ingy dot Net',
-        author_email='ingy@ingy.net',
-        license='Simplified BSD License',
-        url='http://www.pypi.org/pypi/package/',
-
-        packages=[],
-
-        install_requires = [
-            'setuptools',
-            'pyyaml',
-        ],
-    )

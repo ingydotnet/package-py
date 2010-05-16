@@ -1,5 +1,6 @@
 With this Makefile, you can use the following targets:
 
+* setup - Pull in 
 * upgrade - Pull in new files from package-py
 
 These targets are simply run by setup.py:

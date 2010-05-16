@@ -1,11 +1,8 @@
 ``package`` package package
 ---------------------------
 
-This is the ``package`` package for Python. It can be found in the Python
-Package Index, here: http://pypi.python.org/pypi/package/.
-
-``package`` is a package that installs the ``package`` Python module under the
-Python package called ``package``.
+This is the ``package`` package package package for Python. It can be found in
+the Python Package Index, here: http://pypi.python.org/pypi/package/.
 
 ``package`` is a toolset to help Python package people package their packages.
 If you do not personally package Python packages your can ignore this
@@ -16,14 +13,17 @@ Installation
 
 DON'T INSTALL THIS PACKAGE (``package``)!!!
 
-Well OK, you can install it if you want. ``package`` isn't meant to be installed
-like normal Python packages. It is meant to be copied and distributed as a
-part of other Python packages.
+``package`` isn't meant to be installed like normal Python packages. It is
+meant to be copied and distributed as a part of other Python packages.
 
 The best thing to do is to to ``git clone`` it from GitHub, and put it beside
 the other packages that you package for Python::
 
     git clone git://github.com/ingydotnet/package-py.git
+
+The second best thing to do is get the latest `package-#.#.#.tar.gz` from
+http://pypi.python.org/pypi/package/, untar it and rename the directory to
+`package-py`.
 
 Then follow the instructions given below.
 
@@ -66,32 +66,36 @@ Usage
 
 To use this Python package packaging technique, follow these simple steps:
 
-1) ``> cd path/to/your/personal/python/package/called/foo/..``
+1) ``> cd your/src/dir/``
 
    In other words, just go to the directory where you want to put this
    ``package`` package's repository. Putting it next to your other Python
    package source code repositories is what I am suggesting here...
 
-2) ``git clone git://github.com/ingydotnet/package-py.git``
+2) ``> git clone git://github.com/ingydotnet/package-py.git``
 
    Unless, of course, you already have ``package-py``. Then maybe you should
    ``git pull`` it to get the latest code.
 
-3) ``> cd foo``
-4) ``> make -f ../package-py/Makefile setup``
+3) ``> mkdir newproject``
 
-   This will install a ``Makefile``, a new ``setup.py`` file, and create the
-   ``package/`` subdirectory in your project directory.
+4) ``> cd newproject``
 
-5) Edit ``package/info.yaml`` (for information specific to your project)
+5) ``> make -f ../package-py/Makefile.mk setup``
+
+   This will set up the files you need for a new project. It will install a
+   ``Makefile``, a new ``setup.py`` file, and create the ``package/``
+   subdirectory in your project directory.
+
+6) Edit ``package/info.yaml`` (for information specific to your project)
    and ``~/.package-py/config.yaml`` (for information applicable to all
    your Python projects) with all the information about your package.
 
-6) ``> make package-info``
+8) ``> make info``
 
    This will create the package/info.py class from your configuration.
 
-6) ``make help``
+7) ``> make help``
 
    At this point everything should be set up for you to use just like any
    other setup.py.

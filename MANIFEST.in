@@ -1,8 +1,10 @@
-include README.rst
+include bin/*
+include doc/*
+include help/*
+recursive-include layout
 include CHANGES.yaml
 include LICENSE
-include Makefile
-include HelpMake.txt
-include NextSteps.txt
-include package/*
-include bin/*
+include Makefile.mk
+include README.rst
+include my-info.yaml
+include _setup.py

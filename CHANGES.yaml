@@ -7,6 +7,7 @@
   - Support the 'include' directive.
   - Include '' in the setup.py path.
   - Don't let setup.py install the package package.
+  - Include a sample module on `make setup`.
 - version: 0.0.6
   date:    Sat May 15 20:11:12 PDT 2010
   changes: Seapig changes.

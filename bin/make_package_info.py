@@ -36,7 +36,7 @@ def check_config(config):
     if not ('py_modules' in config or
             'packages' in config or
             'packages_from' in config):
-        config['packages_from'] = config['name']
+        config['packages_from'] = [ config['name'] ]
 
     # get version from module
     if 'version_from_module' in config:

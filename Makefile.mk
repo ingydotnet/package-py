@@ -77,7 +77,10 @@ SETUP_TARGETS = \
 UPGRADE_TARGETS = \
 	Makefile \
 	setup.py \
-	$(PACKAGE_FILES) \
+	MANIFEST.in \
+	__init__.py \
+	errors.py \
+	unittest.py \
 
 ALL_TESTS = $(shell echo tests/*.py)
 ALL_DEV_TESTS = $(shell echo dev-tests/*.py)
@@ -118,7 +121,8 @@ info::
 upgrade: _upgrade $(UPGRADE_TARGETS) _fixup info
 
 _upgrade::
-	@if [ -e "package/base" ]; then echo "Don't `make upgrade` here!!!"; exit 1; fi
+	@if [ -e "Makefile.mk" ]; then echo "Don't `make upgrade` here!!!"; exit 1; fi
+	@if [ "$(MAKEFILE_LIST:%=%)" == "Makefile" ]; then echo 'run instead: make -f $(PACKAGE_BASE)/Makefile.mk upgrade'; exit 1; fi
 
 _fixup::
 	$(PYTHON) $(PACKAGE_BASE)/bin/fix_makefile.py "$(PACKAGE_BASE)"

@@ -6,6 +6,10 @@ import sys
 
 from distutils.core import setup, Command
 
+sys.path.insert(0, './layout/')
+
+import package
+
 # try:
 #     from setuptools import setup
 # except ImportError, err:
@@ -20,7 +24,7 @@ from distutils.core import setup, Command
 if __name__ == '__main__':
     setup(
         name='package',
-        version='0.0.8',
+        version=package.__version__,
 
         description='package is a package to package your package',
         long_description = open('README.rst', 'r').read(),

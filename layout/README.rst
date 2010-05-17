@@ -15,7 +15,7 @@ or::
 or::
 
     > git clone git://github.com/you/thingy-py.git
-    > cd reparse-py
+    > cd thingy-py
     > sudo make install
 
 Usage

@@ -5,7 +5,7 @@ This is the ``package`` package package package for Python. It can be found in
 the Python Package Index, here: http://pypi.python.org/pypi/package/.
 
 ``package`` is a toolset to help Python package people package their packages.
-If you do not personally package Python packages your can ignore this
+If you do not personally package Python packages, you can ignore this
 ``package`` package.
 
 Installation
@@ -21,9 +21,9 @@ the other packages that you package for Python::
 
     git clone git://github.com/ingydotnet/package-py.git
 
-The second best thing to do is get the latest `package-#.#.#.tar.gz` from
+The second best thing to do is get the latest ``package-#.#.#.tar.gz`` from
 http://pypi.python.org/pypi/package/, untar it and rename the directory to
-`package-py`.
+``package-py``.
 
 Then follow the instructions given below.
 
@@ -87,9 +87,7 @@ To use this Python package packaging technique, follow these simple steps:
    ``Makefile``, a new ``setup.py`` file, and create the ``package/``
    subdirectory in your project directory.
 
-6) Edit ``package/info.yaml`` (for information specific to your project)
-   and ``~/.package-py/config.yaml`` (for information applicable to all
-   your Python projects) with all the information about your package.
+6) Edit ``package/info.yaml`` with all the information about your package.
 
 8) ``> make info``
 
@@ -106,8 +104,7 @@ To use this Python package packaging technique, follow these simple steps:
 Development Status
 ------------------
 
-This is very ALPHA stuff. Don't use it. Well, OK, go ahead. Wait, no, just
-kidding. Seriously...
+This is very alpha stuff.
 
 I am using this software for all my projects on PyPi. I do most of my
 development on Mac OS X, and Linux using Python 2.6.5.

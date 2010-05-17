@@ -1,3 +1,7 @@
+- version: 0.0.8
+  date:    Sun May 16 19:09:08 PDT 2010
+  changes:
+  - Revise docs.
 - version: 0.0.7
   date:    Sat May 15 20:11:31 PDT 2010
   changes:

@@ -1,10 +1,11 @@
 include bin/*
 include doc/*
 include help/*
-recursive-include layout
+recursive-include layout *
 include CHANGES.yaml
 include LICENSE
 include Makefile.mk
 include README.rst
 include my-info.yaml
+include setup.py
 include _setup.py

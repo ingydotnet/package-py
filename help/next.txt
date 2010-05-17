@@ -1,22 +1,17 @@
 
-You've successfully set up the package package package!
-You have these new things:
+You have successfully set up your new package.
+
+You now have these new things:
 
 * Makefile
 * setup.py
 * package/
 
-Edit these files with the appropriate info:
-
-* ./package/info.yaml
-* ~/.package-py/info.yaml
-
-NOTE: If you don't yet have the second file, you can copy the first one to
-that location.
+Edit the `./package/info.yaml` with the appropriate info.
 
 Next you should run:
 
-    make package-info
+    make info
 
 For more help, run:
 

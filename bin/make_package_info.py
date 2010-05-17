@@ -3,7 +3,7 @@ This script generates a Python module called 'package.info' based on settings
 in configuration files.
 """
 
-import os, sys, pprint, glob
+import os, sys, re, pprint, glob
 
 sys.path.insert(0, '')
 
@@ -50,7 +50,10 @@ def check_config(config):
         module = config['name']
         ns = {}
         exec('import ' + module) in ns
-        config['description'] = ns[module].__doc__
+        desc = ns[module].__doc__
+        m = re.match(r'\s*([^\.\!\n]*)', desc)
+        if m:
+            config['description'] = m.groups()[0]
 
     # read long description
     if 'long_description_from' in config:

@@ -34,7 +34,7 @@ name: your-package
 # version_from_module: ???          # Defaults to 'name'
 
 ## Long package description. You probably want to use 'long_description_from'
-long_description:
+# long_description:
 
 ## The file containing the long description. Default is README*.
 # long_description_from: README

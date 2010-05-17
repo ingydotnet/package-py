@@ -1,8 +1,0 @@
-- Make sure the MANIFEST.in includes everything...
-- trim description
-
-----
-
-- Add a Makefile test to ensure PACKAGE_BASE is valid.
-- Error if setup.py exists on setup
-- Copy README.rst to README on 'make sdist'

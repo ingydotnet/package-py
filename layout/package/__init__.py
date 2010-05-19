@@ -1,5 +1,5 @@
 """\
-package package package
+package - The Python package package package
 """
 
 import os, sys, glob

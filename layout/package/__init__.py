@@ -64,7 +64,7 @@ class Test(Command):
             pass
         sys.exit = exit
 
-        for test in glob.glob(self.test_dir + '/test_*.py'):
+        for test in glob.glob(self.test_dir + '/test*.py'):
             name = test[test.index('/') + 1: test.rindex('.')]
             module = __import__(name)
             module.main(module=module, argv=[''])

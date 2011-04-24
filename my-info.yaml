@@ -2,7 +2,7 @@ author: Ingy dot Net
 author_email: ingy@ingy.net
 github_id: ingydotnet
 
-url: http://pypi.python.org/pypi/%(name)s/
+url: http://github.com/ingydotnet/%(name)s-py/
 
 # From: http://pypi.python.org/pypi?:action=list_classifiers
 # These are the classifiers I use for most new projects.

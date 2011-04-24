@@ -32,14 +32,6 @@ You need to install pyyaml to use the package-py framework as a package author.
 
 """
 
-ENOHOMEINFO = """
-You need to have a file called $HOME/.package-py/info.yaml. This is where you
-put the default info that applies to all your packages.
-
-Just copy ./package/info.yaml to that name and edit it.
-
-"""
-
 ENOLOCALINFO = """
 Strange. I can't find the file called ./package/info.yaml. Did you delete it?
 
@@ -63,6 +55,13 @@ You can find setuptools here:
 
 """
 
-def die(msg):
-    sys.stderr.write(msg)
+EBADINFO = """
+It seems like some of your package/info.yaml settings are wrong.
+Check that file and try again. Your exception msg was:
+
+%(err)s
+"""
+
+def die(msg, err=''):
+    sys.stderr.write(msg % locals())
     sys.exit(1)

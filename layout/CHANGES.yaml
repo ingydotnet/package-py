@@ -1,5 +1,5 @@
 # Add each new entry to the top of the file.
 
 - version: 0.0.1
-  date:    Sun May 16 20:30:08 PDT 2010
+  date:    %(time_string)s
   changes: Initial version.

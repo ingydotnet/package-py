@@ -83,17 +83,26 @@ To use this Python package packaging technique, follow these simple steps:
 
 5) ``> make -f ../package-py/Makefile.mk setup``
 
-   This will set up the files you need for a new project. It will install a
-   ``Makefile``, a new ``setup.py`` file, and create the ``package/``
-   subdirectory in your project directory.
+   This will set up the all files you need for a new project. These files are
+   in a generic, template form until you complete the next two steps.
 
 6) Edit ``package/info.yaml`` with all the information about your package.
 
-8) ``> make info``
+   Commonly, you will only need two lines in this file:
 
-   This will create the package/info.py class from your configuration.
+     name: newproject
+     include: ../package-py/my-info.yaml
 
-7) ``> make help``
+   You can keep all your common values in a common file to be included. The
+   project name, of course, is always different from package to package.
+
+7) ``> make info``
+
+   This command will update your package files with the information you
+   specified in ``package/info.yaml``. You should run it whenever you update
+   your ``info.yaml`` file.
+
+8) ``> make help``
 
    At this point everything should be set up for you to use just like any
    other setup.py.
@@ -101,13 +110,28 @@ To use this Python package packaging technique, follow these simple steps:
    From here on out, you are encouraged (but not required) to use the
    Makefile. Run ``make help`` to see all the options available to you.
 
+9) ``> make test``
+
+   ``package`` provides a complete working test environment environment for
+   your package. It even provides one test. This test is a FAILING test! It
+   tests to see if your new Python module will import cleanly. But it won't.
+   It will, in fact, raise an exception telling you that your module has not
+   yet been implemented.
+
+10) Fix your module, write more tests, finish your module.
+
+11) ``> make upload``
+
+    Ship your new package to PyPI!
+
 Development Status
 ------------------
 
-This is very alpha stuff.
+This ``package`` package package package has been around for year now. Let's
+call it Beta.
 
-I am using this software for all my projects on PyPi. I do most of my
-development on Mac OS X, and Linux using Python 2.6.5.
+I am using this software for all my projects on PyPI. I do most of my
+development on Ubuntu Linux using Python 2.6.6.
 
 I would love to talk to you about your experience in using this software. Feel
 free to hunt me down on the net...
@@ -122,6 +146,6 @@ he has moved on to your neighborhood. Be afraid.
 Copyright
 ---------
 
-``package`` is Copyright (c) 2010, Ingy dot Net
+``package`` is Copyright (c) 2010, 2011, Ingy dot Net
 
 ``package`` is licensed under the New BSD License. See the LICENSE file.

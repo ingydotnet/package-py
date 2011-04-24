@@ -1,21 +1,21 @@
-thingy - Blah blah blah
------------------------
+%(name)s - Package description goes here
+--------------------------------------
 
 Installation
 ------------
 
 Use::
 
-    > sudo pip install thingy
+    > sudo pip install %(name)s
 
 or::
 
-    > sudo easy install thingy
+    > sudo easy install %(name)s
 
 or::
 
-    > git clone git://github.com/you/thingy-py.git
-    > cd thingy-py
+    > git clone git://github.com/%(github_id)s/%(name)s-py.git
+    > cd %(name)s-py
     > sudo make install
 
 Usage
@@ -30,11 +30,11 @@ Community
 Authors
 -------
 
-* You Yourself <you@example.com>
+* %(author)s <%(author_email)s>
 
 Copyright
 ---------
 
-thingy is Copyright (c) 2010, You Yourself
+%(name)s is Copyright (c) %(current_year)s, %(author)s
 
-thingy is licensed under the New BSD License. See the LICENSE file.
+%(name)s is licensed under the New BSD License. See the LICENSE file.

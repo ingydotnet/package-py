@@ -2,9 +2,9 @@ from package.unittest import *
 
 class TestImport(TestCase):
     def test_import(self):
-        import thingy
+        import %(name)s
 
-        self.assertTrue(True, 'thingy modules imported cleanly')
+        self.assertTrue(True, '%(name)s module imported cleanly')
 
 if __name__ == '__main__':
     main()

@@ -50,7 +50,7 @@ PACKAGE_BASE = $(MAKEFILE_LIST:%/Makefile.mk=%)
 PYTHON = python
 
 
-YOUR_PACKAGE = your-package/__init__.py
+YOUR_PACKAGE = yourpackage/__init__.py
 
 LAYOUT_FILES = \
 	setup.py \
@@ -123,8 +123,17 @@ info::
 upgrade:: _upgrade $(UPGRADE_TARGETS) _fixup info
 
 _upgrade::
-	@if [ -e "Makefile.mk" ]; then echo "Don't `make upgrade` here!!!"; exit 1; fi
-	@if [ "$(MAKEFILE_LIST:%=%)" == "Makefile" ]; then echo 'run instead: make -f $(PACKAGE_BASE)/Makefile.mk upgrade'; exit 1; fi
+	@if [ -e "Makefile.mk" ]; then \
+	    echo "You can't `make upgrade` here!!!"; \
+	    exit 1; \
+	fi
+	@if [ "$(MAKEFILE_LIST:%=%)" = "Makefile" ]; then \
+	    echo 'Run this instead:'; \
+	    echo; \
+	    echo '    make -f $(PACKAGE_BASE)/Makefile.mk upgrade'; \
+	    echo; \
+	    exit 1; \
+	fi
 
 _fixup::
 	$(PYTHON) $(PACKAGE_BASE)/bin/fix_makefile.py "$(PACKAGE_BASE)"
@@ -136,7 +145,7 @@ Makefile::
 	cp $(PACKAGE_BASE)/$@.mk $@
 
 $(YOUR_PACKAGE)::
-	mkdir your-package
+	mkdir yourpackage
 	cp $(PACKAGE_BASE)/layout/$@ $@
 
 $(PACKAGE_FILES)::

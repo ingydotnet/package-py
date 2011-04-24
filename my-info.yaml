@@ -1,17 +1,13 @@
-#----------------------------------------------------------------------------#
-# You might want to keep info that is common to all your packages in here.
-# If so, be sure to use the 'include' directive in your info.yaml files.
-#----------------------------------------------------------------------------#
-## Your personal name. Required.
-author: Jane Q Public
- 
-## Your contact email address. Required.
-author_email: you@example.com
+author: Ingy dot Net
+author_email: ingy@ingy.net
+github_id: ingydotnet
 
-## Required. See: http://pypi.python.org/pypi?:action=list_classifiers
+url: http://pypi.python.org/pypi/%(name)s/
+
+# From: http://pypi.python.org/pypi?:action=list_classifiers
+# These are the classifiers I use for most new projects.
 classifiers:
 - 'Development Status :: 2 - Pre-Alpha'
 - 'License :: OSI Approved :: BSD License'
 - 'Programming Language :: Python'
 - 'Intended Audience :: Developers'
-

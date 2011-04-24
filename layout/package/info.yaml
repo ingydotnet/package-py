@@ -3,17 +3,26 @@
 # supplies all the info that eventually gets used by `setup.py`. 
 #----------------------------------------------------------------------------#
 
-## You can include a file of common settings.
+## The name of your package. Required. Many other settings key on this value.
+## YOU SHOULD CHANGE THIS SETTING NOW!!
+name: yourpackage
+
+## You can include a file of your common settings.
 # include: ../package-py/my-info.yaml
 
-## Name of your package. Required. Many other settings key on this value.
-name: your-package
+#----------------------------------------------------------------------------#
+# If you used the 'include' setting above you can often stop here.
+# The settings in this next section should go in your common include file.
+#----------------------------------------------------------------------------#
 
 ## Your personal name. Required.
 # author: Jane Q Public
  
 ## Your contact email address. Required.
 # author_email: you@example.com
+
+## Your GitHub user id. Optional.
+# github_id: janeqpublic
 
 ## Required. See: http://pypi.python.org/pypi?:action=list_classifiers
 # classifiers:
@@ -24,6 +33,7 @@ name: your-package
 
 #----------------------------------------------------------------------------#
 # The remaining values can usually be pulled from your layout.
+# You can specify/override them manually here.
 #----------------------------------------------------------------------------#
 
 ## Short package description. Default is first doc line of main module.

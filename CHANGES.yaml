@@ -1,3 +1,12 @@
+- version: 0.1.1
+  date:    Sun Apr 24 10:33:21 EST 2011
+  changes:
+  - Revamp the documentation
+- version: 0.1.0
+  date:    Sat Apr 23 13:29:18 EST 2011
+  changes:
+  - Fill in template values during 'make setup'.
+  - I no longer use Mac OS X
 - version: 0.0.9
   date:    Mon May 17 12:22:26 PDT 2010
   changes:

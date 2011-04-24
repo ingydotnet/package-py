@@ -1,4 +1,4 @@
-+ Get version number from module.
+- Add a IF thing to templating. Like for the github section in README.rst.
 
 - Start a wiki for package or get access to a useful one.
 - Put urls to helpful wiki pages in the error messages.

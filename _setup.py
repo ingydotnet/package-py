@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
         # See: http://pypi.python.org/pypi?:action=list_classifiers
         classifiers = [
-            'Development Status :: 3 - Alpha',
+            'Development Status :: 4 - Beta',
             'Environment :: Console',
             'Intended Audience :: Developers',
             'License :: OSI Approved :: BSD License',

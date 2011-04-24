@@ -22,5 +22,3 @@ Design Goals
 * Lead users through the installation matrix with lots of helpful suggestions.
 * Provide authors with a set of simple standards for various author tasks.
 * Provide an easy upgrade path for new releases of package-py.
-
-

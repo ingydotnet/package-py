@@ -3,7 +3,7 @@ This script generates a Python module called 'package.info' based on settings
 in configuration files.
 """
 
-import os, sys, re, pprint, glob
+import os, sys, re, pprint, glob, datetime
 
 sys.path.insert(0, '')
 
@@ -14,11 +14,35 @@ try:
 except ImportError, err:
     die(ENOYAML)
 
-def check_config(config):
+def get_config():
+    config = {
+        'current_year': datetime.date.today().year,
+        'time_string': os.popen('date').read().rstrip(),
+    }
+
+    f = './package/info.yaml'
+    if not os.path.exists(f):
+        die(ENOLOCALINFO)
+    d = yaml.load(open(f, 'r'))
+
+    if 'include' in d:
+        config.update(yaml.load(open(d['include'], 'r')))
+        del d['include']
+
+    config.update(d)
+    return config
+
+def check_name(config):
     # require 'name'
     if ('name' not in config or
-            config['name'] == 'your-package'):
+            config['name'] == 'yourpackage'):
         die(ELOCALINFONOTSET)
+
+def check_config(config):
+    # Remove non-standard keys
+    del config['current_year']
+    del config['time_string']
+    del config['github_id']
 
     # set default for version
     if not ('version' in config or
@@ -73,31 +97,7 @@ def check_config(config):
     if 'scripts' not in config:
         config['scripts'] = glob.glob('bin/*')
 
-if __name__ == '__main__':
-    home = os.environ.get('HOME')
-    if not home:
-        die(ENOHOME)
-
-    config = {}
-
-    f = './package/info.yaml'
-    if not os.path.exists(f):
-        die(ENOLOCALINFO)
-    d = yaml.load(open(f, 'r'))
-
-    if 'include' in d:
-        config.update(yaml.load(open(d['include'], 'r')))
-        del d['include']
-
-    config.update(d)
-
-    if (os.path.exists('your-package') and
-            'name' in config and
-            config['name'] != 'your-package'):
-        os.rename('your-package', config['name'])
-
-    check_config(config)
-
+def write_info_py(config):
     info = pprint.pformat(config, indent=2)
 
     module = """\
@@ -108,9 +108,65 @@ def get():
 )
     return info
 """ % locals()
+
+    file = 'package/info.py'
+    action = os.path.exists(file) and 'Updated' or 'Created'
+    print "%(action)s the '%(file)s' module for this package." % locals()
     
-    f = open('package/info.py', 'w')
+    f = open(file, 'w')
     f.write(module)
     f.close()
 
-    print "Created the 'package/info.py' module for this package."
+def update_template(config, file):
+    if not os.path.exists(file):
+        print "Warning: %s does not exist." % file
+        return
+    f = open(file, 'r')
+    text = f.read()
+    f.close()
+    if not re.search(r'%\(\w+\)s', text):
+        return
+    try:
+        text = text % config
+    except KeyError, err:
+        die(EBADINFO, err=err)
+    f = open(file, 'w')
+    f.write(text)
+    f.close()
+    print "Updated '%s' with your info" % file
+
+def add_failing_tests(config):
+    file = "%s/__init__.py" % config['name']
+    f = open(file, 'r')
+    text = f.read()
+    f.close
+
+    text = re.sub(r'# raise ', 'raise ', text)
+    f = open(file, 'w')
+    f.write(text)
+    f.close
+
+
+if __name__ == '__main__':
+    config = get_config()
+
+    initial_setup = False
+    if (os.path.exists('yourpackage') and
+            'name' in config and
+            config['name'] != 'yourpackage'):
+        os.rename('yourpackage', config['name'])
+        initial_setup = True
+
+    check_name(config)
+    update_template(config, 'CHANGES.yaml')
+    update_template(config, 'tests/test_import.py')
+    update_template(config, 'LICENSE')
+    # XXX temporary hack, until template IF works
+    config['github_id'] = config.get('github_id', 'your-github-id')
+    update_template(config, 'README.rst')
+    update_template(config, "%s/__init__.py" % config['name'])
+    check_config(config)
+    write_info_py(config)
+    update_template(config, 'package/info.py')
+    if initial_setup:
+        add_failing_tests(config)

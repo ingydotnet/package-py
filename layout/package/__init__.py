@@ -5,7 +5,7 @@ package - The Python package package package
 import os, sys, glob
 from distutils.core import Command
 
-__version__ = '0.0.9'
+__version__ = '0.1.1'
 
 has_setuptools = False
 
